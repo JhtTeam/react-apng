@@ -62,18 +62,28 @@ export class Frame {
             return Promise.resolve();
         }
         return new Promise((resolve, reject) => {
-            const url = URL.createObjectURL(this.imageData);
+            const hasSupportURL = false;//(typeof (URL) !== 'undefined');
+            const url = hasSupportURL ? URL.createObjectURL(this.imageData) : null;
             this.imageElement = document.createElement('img');
             this.imageElement.onload = () => {
-                URL.revokeObjectURL(url);
+                if (url) URL.revokeObjectURL(url);
                 resolve();
             };
             this.imageElement.onerror = () => {
-                URL.revokeObjectURL(url);
+                if (url) URL.revokeObjectURL(url);
                 this.imageElement = null;
                 reject(new Error("Image creation error"));
             };
-            this.imageElement.src = url;
+            if (url) {
+                this.imageElement.src = url;
+            } else {
+                const imageElement = this.imageElement;
+                let reader = new FileReader();
+                reader.onload = function (evt) {
+                    imageElement.src = reader.result;
+                }
+                reader.readAsDataURL(this.imageData);
+            }
         });
     }
 }
