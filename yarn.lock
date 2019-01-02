@@ -103,10 +103,6 @@ anymatch@^2.0.0:
     micromatch "^3.1.4"
     normalize-path "^2.1.1"
 
-apng-js@^1.0.4:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/apng-js/-/apng-js-1.0.4.tgz#2a55371e13f57a4649e6faf71f0c3b98be0df976"
-
 aproba@^1.0.3, aproba@^1.1.1:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/aproba/-/aproba-1.2.0.tgz#6802e6264efd18c790a1b0d517f0f2627bf2c94a"

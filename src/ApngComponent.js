@@ -105,7 +105,8 @@ class ApngComponent extends React.Component {
         }
     };
     getImgData = async () => {
-        const { canvasBox: canvas } = this.refs;
+        if (!this.canvasBox) return;
+        const canvas = this.canvasBox;
         const { rate, src, autoPlay } = this.state;
         const data = await getImgBuffer(src);
         this.apng = parseAPNG(data);
@@ -152,7 +153,7 @@ class ApngComponent extends React.Component {
         return staticImg ? (
             <img src={staticImg} {...this.props} alt="静态图片" />
         ) : (
-            <canvas ref="canvasBox" {...this.props} />
+            <canvas ref={canvasBox => this.canvasBox = canvasBox} {...this.props} />
         );
     }
 }
