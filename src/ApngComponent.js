@@ -127,9 +127,15 @@ class ApngComponent extends React.Component {
             if (autoPlay) {
                 this.player.play();
                 this.isPlay = true;
+                if (this.props.onPlay) {
+                    this.props.onPlay(true);
+                }
             }
             this.player.on('end', () => {
                 this.isPlay = false;
+                if (this.props.onPlay) {
+                    this.props.onPlay(false);
+                }
             });
         } else {
             this.setState({
